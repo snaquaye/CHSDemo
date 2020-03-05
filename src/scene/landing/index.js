@@ -7,8 +7,8 @@ import { Logo } from "../../components/logo";
 export const Landing = () => {
   return (
     <Layout style={globalStyles.body}>
-      <View style={[styles.logoContainer, globalStyles.container]}>
-        <Logo style={styles.logo} />
+      <View style={[globalStyles.centeredContainer, globalStyles.container]}>
+        <Logo style={globalStyles.logo} />
       </View>
       <View>
         <Button status="success">LOGIN</Button>
@@ -20,13 +20,4 @@ export const Landing = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  logo: {
-    width: 106,
-    height: 97
-  },
-  logoContainer: {
-    justifyContent: "center",
-    alignItems: "center"
-  }
-});
+const styles = StyleSheet.create({});

@@ -9,5 +9,13 @@ export const globalStyles = StyleSheet.create({
     paddingLeft: 34,
     paddingRight: 34,
     flex: 1
+  },
+  centeredContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+    flex: 1
+  },
+  row: {
+    flexDirection: "row"
   }
 });
