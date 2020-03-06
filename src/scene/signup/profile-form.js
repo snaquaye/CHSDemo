@@ -38,7 +38,6 @@ export const ProfileForm = props => {
 
   return (
     <Formik
-      validationSchema={validationSchema}
       initialValues={formValue}
       onSubmit={values => props.submitForm(values)}
     >

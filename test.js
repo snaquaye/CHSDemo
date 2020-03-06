@@ -3,14 +3,15 @@ const person = {
   lastName: "Doe",
   gender: "male"
 };
-
-function getName(callback) {
-  person.firstName = "Samson";
-  return callback();
-}
-
-const func = () => {
-  console.log(person.firstName);
+const k = {
+  firstName: "Samson"
 };
 
-getName(this.func);
+let samson = { ...person, ...k };
+samson = {
+  firstName: person.firstName,
+  lastName: person.lastName,
+  gender: person.gender
+};
+
+samson.firstName = k.firstName;

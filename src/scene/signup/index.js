@@ -7,7 +7,7 @@ import {
   Text
 } from "@ui-kitten/components";
 import { globalStyles } from "../../styles/global-styles";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Alert } from "react-native";
 import { Logo } from "../../components/logo";
 import { CredentialForm } from "./credential-form";
 import { ProfileForm } from "./profile-form";
@@ -52,6 +52,17 @@ export class SignUp extends React.Component {
       this.mutateState(values);
     } else {
       this.mutateState(values);
+      fetch({
+        url: "https://2b66610d.ngrok.io/users",
+        method: "POST",
+        body: JSON.stringify(values)
+      })
+        .then(res => res.json())
+        .then(res => {
+          Alert.alert("Your account has been created");
+          console.log(res);
+        })
+        .catch(error => console.log(error));
     }
   }
 

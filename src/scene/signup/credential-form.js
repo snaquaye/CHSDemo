@@ -34,11 +34,7 @@ export const CredentialForm = props => {
   };
 
   return (
-    <Formik
-      validationSchema={validationSchema}
-      initialValues={formValue}
-      onSubmit={submitForm}
-    >
+    <Formik initialValues={formValue} onSubmit={submitForm}>
       {props => (
         <KeyboardAvoidingView>
           <Text category="h3">User Credential Form</Text>
