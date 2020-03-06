@@ -32,7 +32,12 @@ export const Login = props => {
 
   const renderBackIcon = style => <Icon name="arrow-back" {...style} />;
 
-  const renderBackAction = () => <TopNavigationAction icon={renderBackIcon} />;
+  const renderBackAction = () => (
+    <TopNavigationAction
+      icon={renderBackIcon}
+      onPress={() => props.navigation.goBack()}
+    />
+  );
 
   return (
     <Layout style={globalStyles.container}>

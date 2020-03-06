@@ -33,7 +33,12 @@ export class SignUp extends React.Component {
   };
 
   renderBackAction = () => {
-    return <TopNavigationAction icon={this.renderBackIcon} />;
+    return (
+      <TopNavigationAction
+        icon={this.renderBackIcon}
+        onPress={() => this.props.navigation.goBack()}
+      />
+    );
   };
 
   mutateState(values) {
