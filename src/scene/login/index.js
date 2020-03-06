@@ -91,7 +91,7 @@ export const Login = props => {
                 ref={field => (passwordField = field)}
               />
               <Button status="success" onPress={props.handleSubmit}>
-                NEXT
+                SIGN IN
               </Button>
             </KeyboardAvoidingView>
           )}

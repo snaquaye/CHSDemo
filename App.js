@@ -12,9 +12,8 @@ import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 import { globalStyles } from "./src/styles/global-styles";
 import * as eva from "@eva-design/eva";
 import { EvaIconsPack } from "@ui-kitten/eva-icons";
-import { SignUp } from "./src/scene/signup";
-import { Login } from "./src/scene/login";
-import { DashBoard } from "./src/scene/dashboard";
+import { NavigationContainer } from "@react-navigation/native";
+import { StackNavigator } from "./src/navigation/StackNavigator";
 
 const renderStatusBar = () => {
   if (Platform.OS === "android") {
@@ -33,7 +32,9 @@ export default function App() {
         <SafeAreaView style={globalStyles.container}>
           {renderStatusBar()}
           <IconRegistry icons={EvaIconsPack} />
-          <DashBoard />
+          <NavigationContainer>
+            <StackNavigator />
+          </NavigationContainer>
         </SafeAreaView>
       </ApplicationProvider>
     </SafeAreaProvider>
