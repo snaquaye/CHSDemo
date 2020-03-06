@@ -1,8 +1,15 @@
 import React, { useState } from "react";
-import { Input, Button } from "@ui-kitten/components";
-import { View, TextInput, Alert } from "react-native";
+import { Input, Button, Text } from "@ui-kitten/components";
+import {
+  View,
+  TextInput,
+  Alert,
+  KeyboardAvoidingView,
+  StyleSheet
+} from "react-native";
 import { Formik } from "formik";
 import * as Yup from "yup";
+import { globalStyles } from "../../styles/global-styles";
 
 const validationSchema = Yup.object({
   firstName: Yup.string()
@@ -22,25 +29,21 @@ const validationSchema = Yup.object({
     .label("Phone Number")
 });
 
-export const ProfileForm = () => {
-  const [formValue, setFormValue] = useState({
+export const ProfileForm = props => {
+  const formValue = {
     firstName: "",
     lastName: "",
     phoneNumber: ""
-  });
-
-  const handleSubmit = values => {
-    Alert.alert("Form Submitted", JSON.stringify(values));
   };
 
   return (
     <Formik
       validationSchema={validationSchema}
       initialValues={formValue}
-      onSubmit={handleSubmit}
+      onSubmit={values => props.submitForm(values)}
     >
       {props => (
-        <View>
+        <KeyboardAvoidingView>
           <Text category="h3">User Profile Form</Text>
           <View style={globalStyles.row}>
             <Input
@@ -57,7 +60,8 @@ export const ProfileForm = () => {
                   ? props.errors.firstName
                   : ""
               }
-              onChange={props.handleChange("firstName")}
+              onChangeText={props.handleChange("firstName")}
+              style={styles.input}
             />
             <Input
               label="Last Name"
@@ -73,7 +77,8 @@ export const ProfileForm = () => {
                   ? props.errors.lastName
                   : ""
               }
-              onChange={props.handleChange("lastName")}
+              onChangeText={props.handleChange("lastName")}
+              style={[globalStyles.gutter, styles.input]}
             />
           </View>
           <Input
@@ -90,13 +95,19 @@ export const ProfileForm = () => {
                 ? props.errors.phoneNumber
                 : ""
             }
-            onChange={props.handleChange("phoneNumber")}
+            onChangeText={props.handleChange("phoneNumber")}
           />
           <Button status="success" onPress={props.handleSubmit}>
             SIGN UP
           </Button>
-        </View>
+        </KeyboardAvoidingView>
       )}
     </Formik>
   );
 };
+
+const styles = StyleSheet.create({
+  input: {
+    width: "50%"
+  }
+});

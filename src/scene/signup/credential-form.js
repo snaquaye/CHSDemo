@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { Input, Button, Text } from "@ui-kitten/components";
-import { View, TextInput, Alert } from "react-native";
+import { Button, Icon, Input, Text } from "@ui-kitten/components";
 import { Formik } from "formik";
+import React, { useState } from "react";
+import { Alert, KeyboardAvoidingView } from "react-native";
 import * as Yup from "yup";
 
 const validationSchema = Yup.object({
@@ -16,25 +16,31 @@ const validationSchema = Yup.object({
 });
 
 export const CredentialForm = props => {
-  const [formValue, setFormValue] = useState({
+  let passwordField;
+
+  const formValue = {
     email: "",
     password: ""
-  });
+  };
+
   const [isPasswordVisible, setPasswordVisiblity] = useState(false);
 
-  const handleSubmit = values => {
-    Alert.alert("Form Submitted", JSON.stringify(values));
-    props.nextForm();
+  const renderIcon = style => (
+    <Icon name={isPasswordVisible ? "eye-off" : "eye"} {...style} />
+  );
+
+  const submitForm = values => {
+    props.submitForm(values);
   };
 
   return (
     <Formik
       validationSchema={validationSchema}
       initialValues={formValue}
-      onSubmit={handleSubmit}
+      onSubmit={submitForm}
     >
       {props => (
-        <View>
+        <KeyboardAvoidingView>
           <Text category="h3">User Credential Form</Text>
           <Input
             label="Email"
@@ -50,7 +56,9 @@ export const CredentialForm = props => {
                 ? props.errors.email
                 : ""
             }
-            onChange={props.handleChange("email")}
+            onChangeText={props.handleChange("email")}
+            returnKeyType="next"
+            onSubmitEditing={() => passwordField.focus()}
           />
           <Input
             label="Password"
@@ -67,13 +75,17 @@ export const CredentialForm = props => {
                 ? props.errors.password
                 : ""
             }
-            onChange={props.handleChange("password")}
-            secureTextEntry
+            onChangeText={props.handleChange("password")}
+            icon={renderIcon}
+            onIconPress={() => setPasswordVisiblity(!isPasswordVisible)}
+            secureTextEntry={isPasswordVisible}
+            onSubmitEditing={props.handleSubmit}
+            ref={field => (passwordField = field)}
           />
           <Button status="success" onPress={props.handleSubmit}>
             NEXT
           </Button>
-        </View>
+        </KeyboardAvoidingView>
       )}
     </Formik>
   );

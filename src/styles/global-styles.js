@@ -16,6 +16,31 @@ export const globalStyles = StyleSheet.create({
     flex: 1
   },
   row: {
-    flexDirection: "row"
+    flexDirection: "row",
+    justifyContent: "space-between"
+  },
+  bottomPadding: {
+    paddingBottom: 20
+  },
+  gutter: {
+    marginLeft: 10
+  },
+  title: { fontSize: 20 },
+  centerContent: {
+    alignContent: "center"
+  },
+  redBackground: {
+    backgroundColor: "red"
+  },
+  greenBackground: {
+    backgroundColor: "green"
+  },
+  shadow: {
+    shadowColor: "#000000",
+    shadowOpacity: 0.16,
+    shadowOffset: {
+      height: 0,
+      width: 3
+    }
   }
 });

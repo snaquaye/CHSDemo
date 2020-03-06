@@ -17,7 +17,14 @@ export class SignUp extends React.Component {
     super(props);
 
     this.state = {
-      step: 1
+      step: 1,
+      formValues: {
+        firstName: "",
+        lastName: "",
+        phoneNumber: "",
+        email: "",
+        password: ""
+      }
     };
   }
 
@@ -29,28 +36,37 @@ export class SignUp extends React.Component {
     return <TopNavigationAction icon={this.renderBackIcon} />;
   };
 
-  nextForm = () => {
+  mutateState(values) {
+    this.setState({ formValues: { ...this.state.formValues, ...values } });
+  }
+
+  submitForm(values) {
     let { step } = this.state;
-    this.setState({ step: step + 1 });
-    alert(step);
-  };
+    if (step === 1) {
+      this.setState({ step: step + 1 });
+      this.mutateState(values);
+    } else {
+      this.mutateState(values);
+    }
+  }
 
   render() {
     const form =
       this.state.step === 1 ? (
-        <CredentialForm nextForm={this.nextForm} />
+        <CredentialForm submitForm={values => this.submitForm(values)} />
       ) : (
-        <ProfileForm />
+        <ProfileForm submitForm={values => this.submitForm(values)} />
       );
 
     return (
       <Layout style={globalStyles.container}>
-        <TopNavigation title="Sign Up" leftControl={this.renderBackAction()} />
+        <TopNavigation leftControl={this.renderBackAction()} />
         <View style={globalStyles.body}>
           <View style={[globalStyles.centeredContainer]}>
             <Logo />
+            <Text category="h3">Create Account</Text>
           </View>
-          <View>{form}</View>
+          <View style={globalStyles.container}>{form}</View>
         </View>
       </Layout>
     );
