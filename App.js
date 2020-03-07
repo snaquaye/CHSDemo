@@ -1,19 +1,12 @@
-import React from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  StatusBar,
-  Platform,
-  StatusBarIOS
-} from "react-native";
-import { ApplicationProvider, IconRegistry } from "@ui-kitten/components";
-import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
-import { globalStyles } from "./src/styles/global-styles";
 import * as eva from "@eva-design/eva";
+import { ApplicationProvider, IconRegistry } from "@ui-kitten/components";
 import { EvaIconsPack } from "@ui-kitten/eva-icons";
+import React from "react";
+import { Platform, StatusBar, StatusBarIOS, StyleSheet } from "react-native";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { globalStyles } from "./src/styles/global-styles";
 import { NavigationContainer } from "@react-navigation/native";
-import { StackNavigator } from "./src/navigation/StackNavigator";
+import { AppNavigator } from "./src/navigation/app.navigator";
 
 const renderStatusBar = () => {
   if (Platform.OS === "android") {
@@ -33,7 +26,7 @@ export default function App() {
           {renderStatusBar()}
           <IconRegistry icons={EvaIconsPack} />
           <NavigationContainer>
-            <StackNavigator />
+            <AppNavigator />
           </NavigationContainer>
         </SafeAreaView>
       </ApplicationProvider>

@@ -30,6 +30,8 @@ const validationSchema = Yup.object({
 });
 
 export const ProfileForm = props => {
+  let lastNameField, phoneNumberField;
+
   const formValue = {
     firstName: "",
     lastName: "",
@@ -61,6 +63,7 @@ export const ProfileForm = props => {
               }
               onChangeText={props.handleChange("firstName")}
               style={styles.input}
+              onSubmitEditing={() => lastNameField.focus()}
             />
             <Input
               label="Last Name"
@@ -78,6 +81,8 @@ export const ProfileForm = props => {
               }
               onChangeText={props.handleChange("lastName")}
               style={[globalStyles.gutter, styles.input]}
+              ref={field => (lastNameField = field)}
+              onSubmitEditing={() => phoneNumberField.focus()}
             />
           </View>
           <Input
@@ -95,6 +100,8 @@ export const ProfileForm = props => {
                 : ""
             }
             onChangeText={props.handleChange("phoneNumber")}
+            ref={field => (phoneNumberField = field)}
+            onSubmitEditing={props.handleSubmit}
           />
           <Button status="success" onPress={props.handleSubmit}>
             SIGN UP

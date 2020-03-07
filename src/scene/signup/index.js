@@ -41,28 +41,16 @@ export class SignUp extends React.Component {
     );
   };
 
-  mutateState(values) {
+  mutateFormValue(values) {
     this.setState({ formValues: { ...this.state.formValues, ...values } });
   }
 
   submitForm(values) {
     let { step } = this.state;
+    this.mutateFormValue(values);
     if (step === 1) {
       this.setState({ step: step + 1 });
-      this.mutateState(values);
     } else {
-      this.mutateState(values);
-      fetch({
-        url: "https://2b66610d.ngrok.io/users",
-        method: "POST",
-        body: JSON.stringify(values)
-      })
-        .then(res => res.json())
-        .then(res => {
-          Alert.alert("Your account has been created");
-          console.log(res);
-        })
-        .catch(error => console.log(error));
     }
   }
 
